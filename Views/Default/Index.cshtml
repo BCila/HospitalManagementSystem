@@ -1,0 +1,45 @@
+﻿@model Specialization
+
+<div class="card border-success mb-3 p-3" style="max-width: 32rem;height:32rem;">
+    <div class="card-header bg-transparent border-success">Uzmanlık Alan İşlemleri</div>
+    <div class="card-body text-success">
+        <h5 class="card-title">Uzmanlık alanı ekle</h5>
+        <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalRegisterForm">
+            Launch
+            Modal Register Form
+        </a>
+    </div>
+    <div class="card-footer bg-transparent border-success">Footer</div>
+</div>
+
+
+
+<div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Sign up</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form asp-controller="Default" asp-action="SpecializationCreate" method="post">
+                <div class="modal-body mx-3">
+
+                    <div class="md-form mb-5">
+                        <i class="fas fa-user prefix grey-text"></i>
+                        <input asp-for="Name" type="text" id="orangeForm-name" class="form-control validate">
+                        <label asp-for="Name" data-error="wrong" data-success="right" for="orangeForm-name"> name</label>
+                    </div>
+                </div>
+                <button type="submit" href="/Default/Index" class="btn btn-outline-success">Ekle</button>
+            </form>
+
+            <div class="modal-footer d-flex justify-content-center">
+                <button class="btn btn-deep-orange">Sign up</button>
+            </div>
+        </div>
+    </div>
+</div>

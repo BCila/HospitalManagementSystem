@@ -1,0 +1,40 @@
+﻿@model Doctor
+
+<form asp-action="CreateDoctor" method="post" asp-controller="Doctor">
+    <h3 class="text-secondary">Doktor Ekle</h3>
+    <div class="mb-3">
+        <label asp-for="Name">İsim</label>
+        <input asp-for="Name" placeholder="İsim" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Surname">Soyisim</label>
+        <input asp-for="Surname" placeholder="Soyisim" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Address">Adres</label>
+        <input asp-for="Address" placeholder="Adres" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="SpecializationId">Uzmanlık Alanı</label>
+        <select required asp-for="SpecializationId"
+                class="form-control" asp-items="ViewBag.specilizationSelectList">
+        </select>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Gender">Cinsiyet</label>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" asp-for="Gender" value="Kadın" />
+            <label class="form-check-label">Kadın</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" asp-for="Gender" value="Erkek" />
+            <label class="form-check-label">Erkek</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" asp-for="Gender" value="Diğer" />
+            <label class="form-check-label">Diğer</label>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-outline-success">Ekle</button>
+    <button asp-action="Index" asp-controller="Doctor" class="btn btn-outline-info">Listeye Geri Dön</button>
+</form>
