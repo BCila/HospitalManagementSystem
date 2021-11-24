@@ -1,6 +1,11 @@
 ﻿using HastaneOtomasyon.Context;
 using HastaneOtomasyon.Entities;
+using HastaneOtomasyon.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace HastaneOtomasyon.Controllers
@@ -18,27 +23,29 @@ namespace HastaneOtomasyon.Controllers
             return View(); 
         }
 
-        public IActionResult SpecializationCreate(Specialization specialization)
+        public async Task<ActionResult<IEnumerable<SpecializationVM>>> GetSpecialization()
+        {
+            var specListVM = new SpecializationVM {
+                Specializations =await _context.Specializations.ToListAsync()
+            };
+            return View(specListVM);
+        }
+        public IActionResult SpecializationCreate()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public IActionResult SpecializationCreate(SpecializationVM specializationVM)
         {
             _context.Specializations.Add(new Specialization 
             {
-                Name = specialization.Name            
+                Name = specializationVM.Specialization.Name            
             
             });
             _context.SaveChanges();
 
-            return View("Index");
-        }
-        public async Task<IActionResult> SpecializationDelete(int id)
-        {
-            var deleted =await _context.Specializations.FindAsync(id);
-            if(deleted is null)
-            {
-                return NotFound();
-            }
-             _context.Specializations.Remove(deleted);
-
-            return NoContent();
+            return RedirectToAction("GetSpecialization");
         }
 
     }
