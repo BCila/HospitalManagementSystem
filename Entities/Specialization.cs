@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HastaneOtomasyon.Entities
 {
@@ -7,8 +8,9 @@ namespace HastaneOtomasyon.Entities
         public int Id { get; set; }
         public string Name { get; set; }
 
-        //Doctor Relationship
-        public ICollection<Doctor> Doctors { get; set; }
-        
+        [ForeignKey("DoctorId")]
+        public int DoctorId { get; set; }
+        public virtual Doctor Doctor { get; set; }
+
     }
 }

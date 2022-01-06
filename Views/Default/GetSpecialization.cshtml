@@ -12,6 +12,11 @@
     {
         <tr>
             <td>@spec.Name</td>
+            <td>
+                <a asp-action="DeleleSpecialization" asp-controller="Default" asp-route-id="@spec.Id" type="submit" class="btn btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?')"><i class="bi bi-trash"></i>Sil</a>
+                <a asp-action="UpdateSpecialization" asp-controller="Default" asp-route-id="@spec.Id" type="submit" class="btn btn-warning"><i class="bi bi-trash"></i>Güncelle</a>
+
+            </td>
         </tr>
     }
 </table>
@@ -19,7 +24,7 @@
 
 @*<form asp-action="SpecializationCreate" asp-controller="Specialization" method="post">
 
-</form>*@
+    </form>*@
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -27,22 +32,25 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Country Add</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Alan Ekle</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
             <div class="modal-body">
-                <form asp-action="SpecializationCreate" asp-controller="Specialization" method="post">
-                    @Html.LabelFor(x => x.Specialization.Name)
-                    @Html.TextBoxFor(x => x.Specialization.Name, new { @class = "form-control" })
+                <form asp-action="SpecializationCreate" asp-controller="Default" method="post">
+                    <label asp-for="@Model.Specialization.Name">Alan Adı</label>
+                    @*@Html.LabelFor(x => x.Specialization.Name)*@
+                    <input asp-for="@Model.Specialization.Name" class="form-control" autocomplete="off" />
+                    @*@Html.TextBoxFor(x => x.Specialization.Name, new { @class = "form-control" })*@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                            <i class="bi bi-x-square"></i>
+                            <i class="bi bi-x-square">Kapat</i>
                         </button>
-                        <button type="submit" class="btn btn-success"><i class="bi bi-plus"></i></button>
+                        <button type="submit" class="btn btn-success"><i class="bi bi-plus"></i>Ekle</button>
+
                     </div>
                 </form>
             </div>
@@ -50,7 +58,7 @@
         </div>
     </div>
 </div>
-@*Country Add Modal Buton*@
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-    <i class="bi bi-plus"></i>
+@*Specialization Add Modal Buton*@
+<button type="button" class="btn btn-success rounded" data-toggle="modal" data-target="#exampleModal">
+    <i class="bi bi-plus"></i>Alan Ekle
 </button>

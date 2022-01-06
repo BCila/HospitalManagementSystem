@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,7 +23,8 @@ namespace HastaneOtomasyon.Entities
         public virtual ICollection<Patient> Patients { get; set; }
 
         //Specializition Relationship
-        public int SpecializationId { get; set; }
-        public Specialization Specialization { get; set; }
+        [ForeignKey("Specialization")]
+        public int? SpecializationId { get; set; }
+        public virtual Specialization Specialization { get; set; }
     }
 }

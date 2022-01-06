@@ -1,48 +1,48 @@
 ﻿@model List<Patient>
- 
 
-    <div class="container">
-        <div class="row pt-5">
-            <div class="col-sm-12">
-                <form asp-action="SearchPatient" asp-controller="Patient" method="get" class="d-inline">
-                    <input name="searchValue" type="search" placeholder="ara" />
-                    <button type="submit"><i class="fas fa-search"></i> Ara</button>
-                </form>
-                <a asp-action="CreatePatient" asp-controller="Patient" class="btn btn-success mb-3 float-right">Yeni Hasta Ekle</a>
-                <table class="table table-striped table-hover">
-                    <thead>
+
+<div class="container">
+    <div class="row pt-5">
+        <div class="col-sm-12">
+            <form asp-action="SearchPatient" asp-controller="Patient" method="get" class="d-inline">
+                <input name="searchValue" type="search" placeholder="ara" />
+                <button type="submit"><i class="fas fa-search"></i> Ara</button>
+            </form>
+            <a asp-action="CreatePatient" asp-controller="Patient" class="btn btn-success mb-3 float-right">Yeni Hasta Ekle</a>
+            <table class="table table-striped table-hover">
+                <thead class="bg-dark">
+                    <tr>
+                        <th>İsim</th>
+                        <th>Soyisim</th>
+                        <th>Cinsiyet</th>
+                        <th>Yaş</th>
+                        <th>Telefon No</th>
+                        <th>Doğum Tarihi</th>
+                        <th>Boy</th>
+                        <th>Kilo</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var patient in Model)
+                    {
                         <tr>
-                            <th>İsim</th>
-                            <th>Soyisim</th>
-                            <th>Cinsiyet</th>
-                            <th>Yaş</th>
-                            <th>Telefon No</th>
-                            <th>Doğum Günü</th>
-                            <th>Boy</th>
-                            <th>Kilo</th>
-                            <th>Başvuru Tarihi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var patient in Model)
-                        {
-                            <tr>
-                                <td>@patient.Name</td>
-                                <td>@patient.Surname</td>
-                                <td>@patient.Gender</td>
-                                <td>@patient.Age</td>
-                                <td>@patient.ContactNo</td>
-                                <td>@patient.DateOfBirth</td>
-                                <td>@patient.Height</td>
-                                <td>@patient.Weight</td>
-                                <td>@patient.AddmissionDate</td>
+                            <td>@patient.Name</td>
+                            <td>@patient.Surname</td>
+                            <td>@patient.Gender</td>
+                            <td>@patient.Age</td>
+                            <td>@patient.ContactNo</td>
+                            <td>@patient.DateOfBirth.ToShortDateString()</td>
+                            <td>@patient.Height</td>
+                            <td>@patient.Weight</td>
 
-                                <td><a asp-action="UpdatePatient" asp-controller="Patient" asp-route-id="@patient.Id" class="btn btn-warning">Güncelle</a></td>
-                                <td><a asp-action="DeletePatient" asp-route-id="@patient.Id" asp-controller="Patient" class="btn btn-danger">Sil</a></td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                            <td><a asp-action="UpdatePatient" asp-controller="Patient" asp-route-id="@patient.Id" class="btn btn-warning">Güncelle</a></td>
+                            <td><a onclick="return confirm('Silmek istediğinize emin misiniz?')" asp-action="DeletePatient" asp-route-id="@patient.Id" asp-controller="Patient" class="btn btn-danger">Sil</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
+</div>

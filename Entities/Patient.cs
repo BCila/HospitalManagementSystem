@@ -18,12 +18,12 @@ namespace HastaneOtomasyon.Entities
         public DateTime DateOfBirth { get; set; }
         public float Height { get; set; }
         public float Weight { get; set; }
-        public DateTime AddmissionDate { get; set; }
+        public DateTime? AddmissionDate { get; set; }
         public bool Status { get; set; }
 
         //Doktor ilişkisi
         [ForeignKey("DoctorId")]
-        public int DoctorId { get; set; }
+        public int? DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; }
 
     }

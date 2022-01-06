@@ -4,14 +4,16 @@ using HastaneOtomasyon.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HastaneOtomasyon.Migrations
 {
     [DbContext(typeof(HospitalDbContext))]
-    partial class HospitalDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220105134139_initialCreate")]
+    partial class initialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,7 +37,7 @@ namespace HastaneOtomasyon.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SpecializationId")
+                    b.Property<int>("SpecializationId")
                         .HasColumnType("int");
 
                     b.Property<bool>("Status")
@@ -47,8 +49,7 @@ namespace HastaneOtomasyon.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("SpecializationId")
-                        .IsUnique()
-                        .HasFilter("[SpecializationId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Doctors");
                 });
@@ -122,7 +123,9 @@ namespace HastaneOtomasyon.Migrations
                 {
                     b.HasOne("HastaneOtomasyon.Entities.Specialization", "Specialization")
                         .WithOne("Doctor")
-                        .HasForeignKey("HastaneOtomasyon.Entities.Doctor", "SpecializationId");
+                        .HasForeignKey("HastaneOtomasyon.Entities.Doctor", "SpecializationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Specialization");
                 });

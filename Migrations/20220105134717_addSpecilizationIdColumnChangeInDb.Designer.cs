@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HastaneOtomasyon.Migrations
 {
     [DbContext(typeof(HospitalDbContext))]
-    [Migration("20211123121814_initialCreate")]
-    partial class initialCreate
+    [Migration("20220105134717_addSpecilizationIdColumnChangeInDb")]
+    partial class addSpecilizationIdColumnChangeInDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,7 +37,7 @@ namespace HastaneOtomasyon.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SpecializationId")
+                    b.Property<int?>("SpecializationId")
                         .HasColumnType("int");
 
                     b.Property<bool>("Status")
@@ -48,7 +48,9 @@ namespace HastaneOtomasyon.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SpecializationId");
+                    b.HasIndex("SpecializationId")
+                        .IsUnique()
+                        .HasFilter("[SpecializationId] IS NOT NULL");
 
                     b.ToTable("Doctors");
                 });
@@ -60,7 +62,7 @@ namespace HastaneOtomasyon.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("AddmissionDate")
+                    b.Property<DateTime?>("AddmissionDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Age")
@@ -72,7 +74,7 @@ namespace HastaneOtomasyon.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DoctorId")
+                    b.Property<int?>("DoctorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Gender")
@@ -107,6 +109,9 @@ namespace HastaneOtomasyon.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -118,10 +123,8 @@ namespace HastaneOtomasyon.Migrations
             modelBuilder.Entity("HastaneOtomasyon.Entities.Doctor", b =>
                 {
                     b.HasOne("HastaneOtomasyon.Entities.Specialization", "Specialization")
-                        .WithMany("Doctors")
-                        .HasForeignKey("SpecializationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithOne("Doctor")
+                        .HasForeignKey("HastaneOtomasyon.Entities.Doctor", "SpecializationId");
 
                     b.Navigation("Specialization");
                 });
@@ -130,9 +133,7 @@ namespace HastaneOtomasyon.Migrations
                 {
                     b.HasOne("HastaneOtomasyon.Entities.Doctor", "Doctor")
                         .WithMany("Patients")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DoctorId");
 
                     b.Navigation("Doctor");
                 });
@@ -144,7 +145,7 @@ namespace HastaneOtomasyon.Migrations
 
             modelBuilder.Entity("HastaneOtomasyon.Entities.Specialization", b =>
                 {
-                    b.Navigation("Doctors");
+                    b.Navigation("Doctor");
                 });
 #pragma warning restore 612, 618
         }

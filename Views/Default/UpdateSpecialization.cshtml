@@ -1,0 +1,15 @@
+﻿@model Specialization
+<form asp-action="UpdateSpecialization" asp-controller="Default" method="post">
+    <label asp-for="@Model.Name">Alan Adı</label>
+    @*@Html.LabelFor(x => x.Specialization.Name)*@
+    <input asp-for="@Model.Name" class="form-control" autocomplete="off" />
+    @*@Html.TextBoxFor(x => x.Specialization.Name, new { @class = "form-control" })*@
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            <i class="bi bi-x-square">Kapat</i>
+        </button>
+        <button type="submit" class="btn btn-success"><i class="bi bi-plus"></i>Değişiklikleri Kaydet</button>
+
+    </div>
+</form>
