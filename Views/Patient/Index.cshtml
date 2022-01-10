@@ -15,9 +15,9 @@
                         <th>İsim</th>
                         <th>Soyisim</th>
                         <th>Cinsiyet</th>
-                        <th>Yaş</th>
                         <th>Telefon No</th>
                         <th>Doğum Tarihi</th>
+                        <th>Yaş</th>
                         <th>Boy</th>
                         <th>Kilo</th>
                         <th></th>
@@ -31,9 +31,11 @@
                             <td>@patient.Name</td>
                             <td>@patient.Surname</td>
                             <td>@patient.Gender</td>
-                            <td>@patient.Age</td>
                             <td>@patient.ContactNo</td>
                             <td>@patient.DateOfBirth.ToShortDateString()</td>
+                            <td>@{
+                                    int age = DateTime.Now.Year - @patient.DateOfBirth.Year;
+                                } @age </td>
                             <td>@patient.Height</td>
                             <td>@patient.Weight</td>
 

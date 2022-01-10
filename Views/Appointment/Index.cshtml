@@ -1,0 +1,24 @@
+﻿@model List<Appointment>
+
+<table class="bg-dark">
+    <tr>
+        <th>Hasta Adı</th>
+        <th>Hasta Soyismi</th>
+        <th>Bölüm</th>
+        <th>Doktor</th>
+        <th>Randevu Başlangıç Tarihi</th>
+        <th>Randevu Bitiş Tarihi</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.PatientId</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+    }
+</table>

@@ -39,7 +39,6 @@ namespace HastaneOtomasyon.Controllers
                 Name = patient.Name,
                 Surname = patient.Surname,
                 Gender = patient.Gender,
-                Age = patient.Age,
                 ContactNo = patient.ContactNo,
                 DateOfBirth = patient.DateOfBirth,
                 Height = patient.Height,
@@ -78,7 +77,6 @@ namespace HastaneOtomasyon.Controllers
             }
             patientById.Name = patient.Name;
             patientById.Surname = patient.Surname;
-            patientById.Age = patient.Age;
             patientById.ContactNo = patient.ContactNo;
             patientById.DateOfBirth = patient.DateOfBirth;
             patientById.Height = patient.Height;

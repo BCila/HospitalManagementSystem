@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HastaneOtomasyon.Entities
@@ -13,7 +14,6 @@ namespace HastaneOtomasyon.Entities
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Gender { get; set; }
-        public int Age { get; set; }
         public string ContactNo { get; set; }
         public DateTime DateOfBirth { get; set; }
         public float Height { get; set; }

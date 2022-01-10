@@ -1,5 +1,9 @@
 ﻿using HastaneOtomasyon.Context;
+using HastaneOtomasyon.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HastaneOtomasyon.Controllers
 {
@@ -11,9 +15,13 @@ namespace HastaneOtomasyon.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<ActionResult<IEnumerable<Appointment>>> Index()
         {
-            return View();
+            var appointmentList = await _context.Patients.ToListAsync();
+
+            return View(appointmentList);
         }
+
+
     }
 }
