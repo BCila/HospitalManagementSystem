@@ -1,5 +1,6 @@
 ﻿using HastaneOtomasyon.Context;
 using HastaneOtomasyon.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace HastaneOtomasyon.Controllers
 {
+    [Authorize]
     public class DoctorController:Controller
     {
 

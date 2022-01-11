@@ -30,8 +30,8 @@ namespace ShopApp.WebUI.Controllers
             }
             var user = new ApplicationUser()
             {
-               TcNo = registerModel.TcNo,
-               Email = registerModel.Email
+                UserName = registerModel.UserName,
+                Email = registerModel.Email
             };
             var result = await _userManager.CreateAsync(user, registerModel.Password);
 
@@ -56,7 +56,7 @@ namespace ShopApp.WebUI.Controllers
             {
                 return View(loginModel);
             }
-            var user = await _userManager.FindByEmailAsync(loginModel.Email);
+            var user = await _userManager.FindByNameAsync(loginModel.UserName);
             if (user is null)
             {
                 ModelState.AddModelError("", "Bu email ile daha önce hesap oluşturulmamış");
@@ -65,7 +65,7 @@ namespace ShopApp.WebUI.Controllers
             var result = await _signInManager.PasswordSignInAsync(user, loginModel.Password, true, false);
             if (result.Succeeded)
             {
-                return RedirectToAction("index", "home");
+                return RedirectToAction("index", "patient");
             }
             ModelState.AddModelError("", "Email veya şifre yanlış");
             return View(loginModel);
@@ -73,7 +73,7 @@ namespace ShopApp.WebUI.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
